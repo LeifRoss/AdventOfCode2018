@@ -30,14 +30,12 @@ namespace Puzzles.CalendarDays
 
         public string RunSecondPart(string input)
         {
-            var codes = input.Split('\n').Select(code => code.ToCharArray());
+            var codes = input.Split('\n').Select(code => code.Trim().ToCharArray());
 
             var choices = codes
                 .Where(
                     a => codes.Any(
-                        b => a
-                            .Where((c, idx) => idx < b.Count() && c == b[idx])
-                            .Count() == b.Count() - 1
+                        b => a.Where((c, idx) => c == b[idx]).Count() == b.Count() - 1
                     )
                 )
                 .ToList();
